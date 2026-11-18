@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+
+enum EstadoPagamento {
+  PAGO
+  PENDENTE
+  EXPIRADO
+}
+
+model Payment {
+  id Int @id @default(autoincrement())
+  valor Int
+  status EstadoPagamento @default(PENDENTE)
+  idCobranca String?
+  dataCriacao DateTime @default(now())
+  dataExpiracao DateTime
+
+}
